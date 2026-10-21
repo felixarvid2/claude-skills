@@ -57,6 +57,10 @@ against the current project; versions differ (stock Remix vs Remix Plus).
 - Sky opaque grey behind windows/openings while the original shows its skybox: Remix fog remap turned the
   game fog into volumetric fog that fills the view to the sky (only distant emissives show through). Turn
   `rtx.volumetrics.enableFogRemap` off for that map. Knock out mod layers one at a time before theorising.
+- Skybox nearly black on sunlit outdoor maps (looks like a night sky) while the ground matches: autoexposure
+  adapts to the bright path-traced ground and the skybox keeps a fixed radiance. Raise `rtx.skyBrightness` per
+  map (Anachronox: 140), then re-match exposure; measure sky and ground regions separately. A coloured game fog
+  remapped to volumetrics can tint the ground once the sky lights it.
 - Characters: old engines light models from the lightmap under them plus a model-light colour; path tracing
   has neither, so characters come out dark. A per-character fill light scaled by the map lights' irradiance
   at the model (not a fixed brightness) survives different exposures; filter to real characters (engine
