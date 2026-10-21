@@ -12,6 +12,13 @@ Claude Code skills from my projects. Copy a folder from `skills/` to `~/.claude/
 | [threejs-web-game-pitfalls](skills/threejs-web-game-pitfalls/SKILL.md) | any three.js/WebGL browser game | black flashes from resizing, sprites clipping into walls, UI left over between view modes, shader patching |
 | [playwright-webgl-testing](skills/playwright-webgl-testing/SKILL.md) | any WebGL browser game in a headless container | SwiftShader setup, driving the game, catching one-frame glitches, regression tests, README screenshots |
 | [krabba-passet-release](skills/krabba-passet-release/SKILL.md) | [Krabba-passet](https://github.com/felixarvid2/Krabba-passet) | version bump checklist, test suite, republishing the artifact, releases with a zip |
+| [parallel-subagent-builds](skills/parallel-subagent-builds/SKILL.md) | any large feature in one repo | split work across parallel subagents: shared contracts first, file ownership, waves, checkpoints |
+| [claude-artifact-game-publish](skills/claude-artifact-game-publish/SKILL.md) | Vite/Three.js web games | build and publish a game as a claude.ai artifact, CSP pitfalls, updating in place |
+| [headless-browser-game-checks](skills/headless-browser-game-checks/SKILL.md) | WebGL browser games | Playwright + software-GL Chromium, mobile emulation, tap/overlap assertions |
+| [mobile-portrait-game-ui](skills/mobile-portrait-game-ui/SKILL.md) | browser games on phones | audit and fix portrait UI: thumb zone, 44 px targets, panel stack, Back button, confirm sheets |
+| [free-game-asset-pipeline](skills/free-game-asset-pipeline/SKILL.md) | web games | CC0 models, textures, audio (Kenney, Quaternius, Poly Haven, ambientCG), import, paid-generation guardrails |
+| [cloud-session-github-ops](skills/cloud-session-github-ops/SKILL.md) | Claude Code cloud sessions | pushes, releases without tag pushes, new repos, splitting repos, secret checks |
+| [ashfall-region-pipeline](skills/ashfall-region-pipeline/SKILL.md) | [Ashfall](https://github.com/felixarvid2/Ashfall) | how a region or game phase is planned, built, tested and shipped |
 
 The two `anox-*` skills use tools in the anoxrtx repo (`tools/rigsession.sh`, `anoxcheck.py`, `ab_ev.py`);
 their source of truth is that repo's `.claude/skills/`. The general skills come from one project (Anachronox):
@@ -20,3 +27,6 @@ treat the examples as a checklist to re-check, not as facts for every game.
 `krabba-passet-release` is specific to the game's source in [felixarvid2/test](https://github.com/felixarvid2/test)
 (`natverksspel/`); its source of truth, like the two general three.js/Playwright skills, is that repo's
 `.claude/skills/`. The general skills come from one project: re-check versions and paths before relying on them.
+
+The game skills come from [Ashfall](https://github.com/felixarvid2/Ashfall), whose `.claude/skills/` is their source of
+truth; `ashfall-region-pipeline` is specific to that repo, the others are general.
