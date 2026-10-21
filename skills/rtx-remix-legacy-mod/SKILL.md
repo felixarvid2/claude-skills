@@ -54,6 +54,9 @@ against the current project; versions differ (stock Remix vs Remix Plus).
 - `rtx.tonemap.exposureBias` per map; autoexposure absorbs part of every change, so do a second pass.
 - Look at every compare image. EV also moves for non-exposure reasons: missing fog, a different sky
   (night vs day), views outside the map, cutscenes, black loading frames. Record those separately.
+- Sky opaque grey behind windows/openings while the original shows its skybox: Remix fog remap turned the
+  game fog into volumetric fog that fills the view to the sky (only distant emissives show through). Turn
+  `rtx.volumetrics.enableFogRemap` off for that map. Knock out mod layers one at a time before theorising.
 - Characters: old engines light models from the lightmap under them plus a model-light colour; path tracing
   has neither, so characters come out dark. A per-character fill light scaled by the map lights' irradiance
   at the model (not a fixed brightness) survives different exposures; filter to real characters (engine
