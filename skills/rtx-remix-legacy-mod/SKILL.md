@@ -61,6 +61,10 @@ against the current project; versions differ (stock Remix vs Remix Plus).
   adapts to the bright path-traced ground and the skybox keeps a fixed radiance. Raise `rtx.skyBrightness` per
   map (Anachronox: 140), then re-match exposure; measure sky and ground regions separately. A coloured game fog
   remapped to volumetrics can tint the ground once the sky lights it.
+- A colour cast over the whole scene that the original lacks (Anachronox: purple under a yellow-white fog) can
+  come from the fog remap too; turn it off for that map before touching materials or lights.
+- To find dark skies across many maps, shoot views pitched upwards (sky in the top third) and compare top-third
+  vs bottom-third EV; a gap of several EV is the skybox, an even offset is plain exposure.
 - Characters: old engines light models from the lightmap under them plus a model-light colour; path tracing
   has neither, so characters come out dark. A per-character fill light scaled by the map lights' irradiance
   at the model (not a fixed brightness) survives different exposures; filter to real characters (engine
