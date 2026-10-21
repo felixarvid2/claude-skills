@@ -27,14 +27,21 @@ against the current project; versions differ (stock Remix vs Remix Plus).
   overwrite condition triggered` / "Waiting on server" with no "resolved" afterwards, and often
   `Message channel ... handshake timeout. Retrying...` in the Remix log. The frame freezes or stays black and
   the Remix welcome overlay is missing.
-- Games that recreate their window/device during startup can stall when they also load a big level at the
-  same moment (e.g. a `+map` launch argument). Loading the same level from the menu works: test the path a
-  player takes before calling it a game bug.
-- Queue options in `bridge.conf` (defaults): `clientChannelMemSize` 96MB, `clientCmdQueueSize` /
-  `clientDataQueueSize` 3000, `serverCmdQueueSize` 10, `serverDataQueueSize` 25. Raising the client queue did
-  not fix a stall; do not ship a queue change without repeated runs showing it matters.
-- Intermittent hangs: measure the failure rate of the unchanged baseline first. One passing run after a
-  change proves nothing. Bisecting data (e.g. a light list) only works when the failure is deterministic.
+- Deadlock on heavy loads (map loads, many texture uploads): the client waits for room in the data ring
+  (stack: `UnlockRect` in the bridge client) while the idle server waits in `waitForCommand`. The chance scales
+  with the ring size `clientChannelMemSize` (bytes, default 96 MB): Anachronox servicetunnel stalled 10/10 at
+  48 MB, 3-5/10 at 96 MB, 0/10 at 192 MB (`clientChannelMemSize = 201326592`). `clientDataQueueSize` (item
+  count) does not size that ring and did not help.
+- Other options (defaults): `clientCmdQueueSize` / `clientDataQueueSize` 3000, `serverCmdQueueSize` 10,
+  `serverDataQueueSize` 25. Change none of them without repeated runs (10+ loads) against an unchanged
+  baseline.
+- Intermittent hangs: measure the failure rate of the unchanged baseline first (10 runs). One passing run after
+  a change proves nothing. Bisecting data (e.g. a light list) only works when the failure is deterministic;
+  knocking out features one at a time can show "no single cause" for a size/timing problem.
+- Thread stacks of a hung Proton game: with the game's `WINEPREFIX`, Proton's `files/bin/wineserver` as
+  `WINESERVER` and `files/bin/wine`, run `wine winedbg --command "info proc"`, then pipe
+  `attach 0x<pid>` / `bt all` / `detach` into `wine winedbg`. NvRemixBridge.exe ships a PDB, so server frames
+  get names; map wrapper addresses with `llvm-addr2line -f -e opengl32.dll <ImageBase+offset>`.
 
 ## Matching the original look
 
