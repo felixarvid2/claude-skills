@@ -70,6 +70,11 @@ against the current project; versions differ (stock Remix vs Remix Plus).
   at the model (not a fixed brightness) survives different exposures; filter to real characters (engine
   render flags), not props, or lamps blow out walls. Outdoor maps need less (sky not counted).
 
+- Untextured additive draws (Quake 2 style beams: `glDisable(GL_TEXTURE_2D)`, blend SRC_ALPHA/ONE, vertex colour)
+  render dark under Remix, and no texture-hash setting can reach them. Log untextured perspective draws in the
+  wrapper to identify them. Unsolved in Anachronox: a solid colour texture made them faint instead of black, but
+  `enableEmissiveBlendEmissiveOverride` (even at intensity 100) did not make them glow.
+
 ## Procedural / animated textures
 
 - Textures updated per frame with `glTexSubImage2D` change their Remix hash every frame. Freeze one stable
