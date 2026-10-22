@@ -69,6 +69,13 @@ against the current project; versions differ (stock Remix vs Remix Plus).
   has neither, so characters come out dark. A per-character fill light scaled by the map lights' irradiance
   at the model (not a fixed brightness) survives different exposures; filter to real characters (engine
   render flags), not props, or lamps blow out walls. Outdoor maps need less (sky not counted).
+  Tuning per map: the fill is only part of the light on a character (Anachronox: 0.25-0.65 EV per doubling of
+  the fill), so scale once, measure the response, then scale again from it. Where the path-traced room light
+  alone over-lights the character, no fill value fixes it; record that instead of pushing to 0.
+- Fullbright models (drawn without lighting in the original) come out nearly black. Give their materials
+  emission from their own texture (~0.5); world-space-UI texture lists make them flat and too bright.
+- Free-camera views: Quake-style engines draw only what the player's PVS shows, so place test cameras in the
+  spawn cluster's PVS. A camera at the spawn sits inside the player model and Remix renders a black frame.
 
 - Untextured additive draws (Quake 2 style beams: `glDisable(GL_TEXTURE_2D)`, blend SRC_ALPHA/ONE, vertex colour)
   render dark under Remix, and no texture-hash setting can reach them. Log untextured perspective draws in the
