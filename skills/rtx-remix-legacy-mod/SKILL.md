@@ -72,8 +72,11 @@ against the current project; versions differ (stock Remix vs Remix Plus).
   Tuning per map: the fill is only part of the light on a character (Anachronox: 0.25-0.65 EV per doubling of
   the fill), so scale once, measure the response, then scale again from it. Where the path-traced room light
   alone over-lights the character, no fill value fixes it; record that instead of pushing to 0.
-- Fullbright models (drawn without lighting in the original) come out nearly black. Give their materials
-  emission from their own texture (~0.5); world-space-UI texture lists make them flat and too bright.
+- Props lit by a model-light flag in the original (Anachronox: entity.dat lighting 1 = RF_DIRLIGHT, the same as
+  characters) come out nearly black when no fill light reaches them. Check what a flag does in the game code
+  before naming it (it is not fullbright). Fix: emission from the prop's own texture (~0.5); world-space-UI
+  texture lists make them flat and too bright.
+- Local fog volumes (Anachronox func_fog) can render as opaque black boxes under Remix.
 - Free-camera views: Quake-style engines draw only what the player's PVS shows, so place test cameras in the
   spawn cluster's PVS. A camera at the spawn sits inside the player model and Remix renders a black frame.
 
