@@ -89,6 +89,11 @@ against the current project; versions differ (stock Remix vs Remix Plus).
 
 - Textures updated per frame with `glTexSubImage2D` change their Remix hash every frame. Freeze one stable
   frame (fixed size, recreated D3D texture filled with that frame) so a replacement material can bind to it.
+- Loose-file texture packs (e.g. a community upscale mod) change the Remix hash of every texture they replace, so
+  every hash list and material override keyed by the old hash silently stops matching (skybox list, decals,
+  emissive overrides). Map old -> new hash per file, keep the old hashes and add the new ones (identical originals
+  can map to several pack files; a new hash can equal an unrelated old one, so in-place replacement is unsafe).
+  Check one functional override in-game afterwards (an emissive prop at the same EV as before).
 - HD texture packs that upscale palettes can break engine code that requires exact sizes (Anachronox's lava
   palette must be 256 px wide).
 
