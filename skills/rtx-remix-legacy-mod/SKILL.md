@@ -84,6 +84,13 @@ against the current project; versions differ (stock Remix vs Remix Plus).
   render dark under Remix, and no texture-hash setting can reach them. Log untextured perspective draws in the
   wrapper to identify them. Unsolved in Anachronox: a solid colour texture made them faint instead of black, but
   `enableEmissiveBlendEmissiveOverride` (even at intensity 100) did not make them glow.
+- Textured additive effects (blend SRC_ALPHA/ONE with a texture: energy columns, glows) also come out very faint, but
+  they do respond to `rtx.enableEmissiveBlendEmissiveOverride = True` + `rtx.emissiveBlendOverrideEmissiveIntensity`
+  (Anachronox bricksd: 2.5 matched the original, 10 blew out white). It changes every additive draw, so set it per
+  map. Before un-ignoring a texture from `rtx.ignoreTextures` that such an effect uses, check its other users: it may
+  be ignored because it breaks something else (a character's env-map layer turned the model blue-white).
+- Quake 2 engines keep `gl_log`: `gl_log 1;wait;wait;gl_log 0` in the console writes every GL call of a few frames
+  to `<gamedir>/gl.log`, which shows how an effect is drawn (blend, texture binds, vertex colours).
 
 ## Procedural / animated textures
 
