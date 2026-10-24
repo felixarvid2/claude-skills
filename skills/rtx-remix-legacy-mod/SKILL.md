@@ -82,8 +82,10 @@ against the current project; versions differ (stock Remix vs Remix Plus).
 
 - Untextured additive draws (Quake 2 style beams: `glDisable(GL_TEXTURE_2D)`, blend SRC_ALPHA/ONE, vertex colour)
   render dark under Remix, and no texture-hash setting can reach them. Log untextured perspective draws in the
-  wrapper to identify them. Unsolved in Anachronox: a solid colour texture made them faint instead of black, but
-  `enableEmissiveBlendEmissiveOverride` (even at intensity 100) did not make them glow.
+  wrapper to identify them. Fix: bind a small solid texture of their colour AND add a texcoord set to the vertex
+  format; without texcoords Remix still treats the draw as untextured and ignores
+  `enableEmissiveBlendEmissiveOverride`. With both, the per-map override makes them glow (Anachronox: func_fog indoors
+  at intensity 8; laser beams on a sunlit map needed 150, since outdoor exposure is far lower).
 - Textured additive effects (blend SRC_ALPHA/ONE with a texture: energy columns, glows) also come out very faint, but
   they do respond to `rtx.enableEmissiveBlendEmissiveOverride = True` + `rtx.emissiveBlendOverrideEmissiveIntensity`
   (Anachronox bricksd: 2.5 matched the original, 10 blew out white). It changes every additive draw, so set it per
