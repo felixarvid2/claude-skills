@@ -86,6 +86,8 @@ against the current project; versions differ (stock Remix vs Remix Plus).
   format; without texcoords Remix still treats the draw as untextured and ignores
   `enableEmissiveBlendEmissiveOverride`. With both, the per-map override makes them glow (Anachronox: func_fog indoors
   at intensity 8; laser beams on a sunlit map needed 150, since outdoor exposure is far lower).
+  Any per-colour texture cache in the wrapper must evict: it lives across maps, and one random-colour effect can fill
+  it, after which later maps' effects silently fall back to untextured (black). Test fixes over a sequence of maps.
 - Textured additive effects (blend SRC_ALPHA/ONE with a texture: energy columns, glows) also come out very faint, but
   they do respond to `rtx.enableEmissiveBlendEmissiveOverride = True` + `rtx.emissiveBlendOverrideEmissiveIntensity`
   (Anachronox bricksd: 2.5 matched the original, 10 blew out white). It changes every additive draw, so set it per
