@@ -10,12 +10,13 @@ Claude Code skills from my projects. Copy a folder from `skills/` to `~/.claude/
 | [anox-ab-measure](skills/anox-ab-measure/SKILL.md) | [anoxrtx](https://github.com/felixarvid2/anoxrtx) | measure Remix vs the original renderer, set exposure bias / character fill light |
 | [anox-game-test](skills/anox-game-test/SKILL.md) | [anoxrtx](https://github.com/felixarvid2/anoxrtx) | run the game in the test rig and collect evidence |
 | [threejs-web-game-pitfalls](skills/threejs-web-game-pitfalls/SKILL.md) | any three.js/WebGL browser game | black flashes from resizing, sprites clipping into walls, UI left over between view modes, shader patching |
-| [playwright-webgl-testing](skills/playwright-webgl-testing/SKILL.md) | any WebGL browser game in a headless container | SwiftShader setup, driving the game, catching one-frame glitches, regression tests, README screenshots |
+| [playwright-webgl-testing](skills/playwright-webgl-testing/SKILL.md) | any WebGL browser game in a headless container | SwiftShader setup, driving the game, desktop/mobile layout and tap checks, one-frame glitches, regression tests, README screenshots |
 | [krabba-passet-release](skills/krabba-passet-release/SKILL.md) | [Krabba-passet](https://github.com/felixarvid2/Krabba-passet) | version bump checklist, test suite, republishing the artifact, releases with a zip |
 | [parallel-subagent-builds](skills/parallel-subagent-builds/SKILL.md) | any large feature in one repo | split work across parallel subagents: shared contracts first, file ownership, waves, checkpoints |
 | [claude-artifact-game-publish](skills/claude-artifact-game-publish/SKILL.md) | Vite/Three.js web games | build and publish a game as a claude.ai artifact, CSP pitfalls, updating in place |
-| [headless-browser-game-checks](skills/headless-browser-game-checks/SKILL.md) | WebGL browser games | Playwright + software-GL Chromium, mobile emulation, tap/overlap assertions |
-| [mobile-portrait-game-ui](skills/mobile-portrait-game-ui/SKILL.md) | browser games on phones | audit and fix portrait UI: thumb zone, 44 px targets, panel stack, Back button, confirm sheets |
+| [mobile-portrait-game-ui](skills/mobile-portrait-game-ui/SKILL.md) | browser games, esp. on phones | audit and fix portrait UI (thumb zone, 44 px targets, panel stack, Back button, confirm sheets) plus game-UI rules for every viewport: hierarchy, stable layout, event-driven HUD, gamepad focus, accessibility |
+| [game-ui-ux](skills/game-ui-ux/SKILL.md) | any game (third-party, Apache-2.0) | engine-neutral HUD/menu layout, scaling, safe areas, focus navigation, screen stack |
+| [threejs-game-ui-designer](skills/threejs-game-ui-designer/SKILL.md) | three.js games (third-party, MIT) | HUD/menu workflow, UI states, zones, touch controls, text fit |
 | [free-game-asset-pipeline](skills/free-game-asset-pipeline/SKILL.md) | web games | CC0 models, textures, audio (Kenney, Quaternius, Poly Haven, ambientCG), import, paid-generation guardrails |
 | [cloud-session-github-ops](skills/cloud-session-github-ops/SKILL.md) | Claude Code cloud sessions | pushes, releases without tag pushes, new repos, splitting repos, secret checks |
 | [ashfall-region-pipeline](skills/ashfall-region-pipeline/SKILL.md) | [Ashfall](https://github.com/felixarvid2/Ashfall) | how a region or game phase is planned, built, tested and shipped |
@@ -26,7 +27,10 @@ treat the examples as a checklist to re-check, not as facts for every game.
 
 `krabba-passet-release` is specific to the game's source in [felixarvid2/test](https://github.com/felixarvid2/test)
 (`natverksspel/`); its source of truth, like the two general three.js/Playwright skills, is that repo's
-`.claude/skills/`. The general skills come from one project: re-check versions and paths before relying on them.
+`.claude/skills/` (`playwright-webgl-testing` is also kept in Ashfall, merged from both projects). The general skills come from one project: re-check versions and paths before relying on them.
+
+`game-ui-ux` and `threejs-game-ui-designer` are third-party skills, copied with their licences; each folder's
+`SOURCE.md` names the upstream repo and commit.
 
 The game skills come from [Ashfall](https://github.com/felixarvid2/Ashfall), whose `.claude/skills/` is their source of
 truth; `ashfall-region-pipeline` is specific to that repo, the others are general.
