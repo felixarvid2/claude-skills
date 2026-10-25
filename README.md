@@ -19,6 +19,7 @@ Claude Code skills from my projects. Copy a folder from `skills/` to `~/.claude/
 | [threejs-game-ui-designer](skills/threejs-game-ui-designer/SKILL.md) | three.js games (third-party, MIT) | HUD/menu workflow, UI states, zones, touch controls, text fit |
 | [free-game-asset-pipeline](skills/free-game-asset-pipeline/SKILL.md) | web games | CC0 models, textures, audio (Kenney, Quaternius, Poly Haven, ambientCG), import, paid-generation guardrails |
 | [cloud-session-github-ops](skills/cloud-session-github-ops/SKILL.md) | Claude Code cloud sessions | pushes, releases without tag pushes, new repos, splitting repos, secret checks |
+| [autonomous-github-release](skills/autonomous-github-release/SKILL.md) | any GitHub repo, incl. Claude Code cloud sessions | cut a release on your own: version, notes since the last release, a notes-file PR that triggers the release workflow (template included), verify the assets |
 | [ashfall-region-pipeline](skills/ashfall-region-pipeline/SKILL.md) | [Ashfall](https://github.com/felixarvid2/Ashfall) | how a region or game phase is planned, built, tested and shipped |
 
 The two `anox-*` skills use tools in the anoxrtx repo (`tools/rigsession.sh`, `anoxcheck.py`, `ab_ev.py`);
