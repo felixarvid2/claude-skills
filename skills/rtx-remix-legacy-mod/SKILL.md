@@ -93,6 +93,12 @@ against the current project; versions differ (stock Remix vs Remix Plus).
   (Anachronox bricksd: 2.5 matched the original, 10 blew out white). It changes every additive draw, so set it per
   map. Before un-ignoring a texture from `rtx.ignoreTextures` that such an effect uses, check its other users: it may
   be ignored because it breaks something else (a character's env-map layer turned the model blue-white).
+- Full-screen tints drawn as a 3D quad in front of the camera (Quake 2 R_PolyBlend: damage flashes, under water,
+  script fades, the fade-in at map start) become an opaque grey plane under Remix at any colour/alpha. Detect the
+  quad in the wrapper and redraw it with an orthographic projection and a dedicated small texture whose hash is in
+  `rtx.uiTextures`; with `rtx.orthographicIsUI = False` an untextured or unlisted ortho draw is not shown. Do not
+  reuse a texture that world draws also use. `DrawPrimitiveUP` through the bridge did not show either; use the
+  wrapper's normal vertex-buffer path.
 - Quake 2 engines keep `gl_log`: `gl_log 1;wait;wait;gl_log 0` in the console writes every GL call of a few frames
   to `<gamedir>/gl.log`, which shows how an effect is drawn (blend, texture binds, vertex colours).
 
