@@ -100,7 +100,20 @@ Uppföljning för hand:
 | Klimatuppsatsen utan glosor (bara allmänkunskap: IPCC, Parisavtalet, 2045) | 51 / 0 / 0 / 73 |
 | Klimatuppsatsen med två egna detaljer från eleven (skyfallet i Gävle 2021, solceller hemma) | 27 / 0 / 0 / 47 |
 
-Efter blindtestet fick skillen regeln om tolkande glosor, genreråd för LinkedIn, produkttext och rapport och
+Andra blindrundan, ny agent med den uppdaterade skillen (– = under Smodins gräns på 1 000 tecken):
+
+| Text | Runda 1 | Runda 2 |
+|---|---|---|
+| LinkedIn | 16 / 0 / 0 / 46 | 0 / – / 0 / 41 |
+| Produkttext | 0 / 0 / 0 / 46 | 0 / 0 / 0 / 45 |
+| Enkätrapport | 46 / 0 / 48 / 68 | 0 / – / 21 / 39 |
+| Klimatuppsats (inga detaljer) | 40 / 0 / 51 / 77 | 79 / 0 / 30 / 62 |
+
+Under rättningsvarvet strök agenten på egen hand detaljer som den hade hittat på i första utkastet
+(funktioner hos bryggaren, lunchställen och lägenhet i LinkedIn-inlägget). Det var faktakontrollen som
+fångade dem.
+
+Efter första blindrundan fick skillen regeln om tolkande glosor, genreråd för LinkedIn, produkttext och rapport och
 faktakontrollen `--source`.
 
 ## Mönster

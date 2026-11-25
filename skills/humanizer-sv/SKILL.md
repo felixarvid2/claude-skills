@@ -51,7 +51,8 @@ Om texten är generisk, **fråga användaren** efter 3–6 riktiga detaljer som 
 - blogg: datum, platser, priser, namn på ställen, vad som gick snett
 - rapport: tabellvärden, metod, urval, årtal
 
-Kan användaren inte svara: skriv om ändå med det som finns och med fakta du säkert vet (en roman, en
+Fråga en gång. Har användaren redan sagt att det inte finns några detaljer, fråga inte igen. Kan eller vill
+användaren inte svara: skriv om ändå med det som finns och med fakta du säkert vet (en roman, en
 rapport från IPCC, ett riksdagsbeslut). Lista sedan i ditt svar, inte i den färdiga texten, var detaljer
 skulle göra mest nytta (`ett eget exempel i stycke 2`, `källa med år i stycke 3`). Säg rakt ut att starka
 detektorer troligen ger högt utslag utan dem. I testet låg en klimatuppsats byggd på allmänkunskap kvar på
@@ -124,13 +125,15 @@ Kör också faktakontrollen mot källorna (originalet och det användaren har sk
 ```bash
 python3 scripts/sv_check.py omskriven.txt --source original.txt,uppgifter.txt
 ```
-Den listar siffror och namn som inte finns i källorna. Varje sådan detalj måste vara något du säkert vet,
-annars stryker du den. Lätt att glida på: produkttexter (funktioner som inte finns), LinkedIn
+Den listar siffror och namn som inte finns i källorna. Listan är till för granskning: behåll en detalj bara om
+du säkert vet att den stämmer (till exempel årtalet för Parisavtalet), annars stryk den. Rubrikord och
+etiketter i faktarutor kan dyka upp som falsklarm. Lätt att glida på: produkttexter (funktioner som inte finns), LinkedIn
 (teamritualer, kollegors namn) och rapporter (årtal som bara är gissade).
 
 Läs sedan texten som en svensk läsare: låter något översatt? Finns det en mening som bara finns för att låta
 bra? Stryk den. Arbetet är **ett** omskrivningsutkast plus **ett** rättningsvarv. Fler varv slätar ut texten
-igen.
+igen. Fyll aldrig ut en text för att den ska nå en detektors minimilängd (Smodin vill ha 1 000 tecken): mät
+hellre med de andra detektorerna.
 
 ### 7. Mät mot detektorerna (valfritt)
 ```bash
@@ -172,8 +175,8 @@ inte hjälper, och det försämrar texten.
   och när. Det gav 0 / 0 / 0 / 12 i testet. ZeroGPT flaggar även mänsklig formell svenska, så räkna med
   några procent där.
 - **LinkedIn-inlägg:** inga `otroligt glad och stolt`, `fantastiska kollegor`, `min resa`, `nu kör vi!` och
-  inga raketemojis. Börja med fakta (datum, företag, roll), en sak du faktiskt gjorde med ett resultat, ett
-  tack som säger vad kollegorna lärde dig.
+  inga raketemojis. Börja med fakta (datum, företag, roll) och en sak du faktiskt gjorde med ett resultat.
+  Tacka kort, och säg vad kollegorna lärde dig bara om användaren har berättat det.
 - **Produkttext:** mått, effekt, material, pris, garanti och vad som *inte* ingår. Inga `Upptäck`,
   `perfekta kombinationen`, `den ultimata upplevelsen`, `Beställ i dag och upptäck skillnaden!`. Lägg inte
   till funktioner som tillverkaren inte har uppgett.

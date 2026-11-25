@@ -101,7 +101,8 @@ def check(text):
     if re.search(r"\b\d{1,3},\d{3}\b", text): typo["tusentalskomma (svenska: 1 000)"] = 1
     if re.search(r"\b[A-ZÅÄÖ]{2,}s\b", text): typo["genitiv utan kolon (EU:s, AI:s)"] = len(re.findall(r"\b[A-ZÅÄÖ]{2,}s\b", text))
     heads = [l for l in text.splitlines() if l.strip() and len(l.split()) <= 8 and not l.strip().endswith((".", "!", "?", ","))]
-    tc = [h for h in heads if len(h.split()) >= 3 and all(w[:1].isupper() or not w[:1].isalpha() for w in h.split())]
+    tc = [h for h in heads if ":" not in h and not re.search(r"\d", h) and len([w for w in h.split() if w[:1].isalpha()]) >= 3
+          and all(w[:1].isupper() for w in h.split() if w[:1].isalpha())]
     if tc: typo["Versaler I Rubriker (engelsk stil)"] = len(tc)
     colons = len(re.findall(r":\s+[a-zåäö]", text))
     qs = sum(1 for s in sents if s.endswith("?"))
@@ -152,7 +153,8 @@ def new_specifics(text, source):
     src = source.lower()
     nums = {n for n in re.findall(r"\d[\d ,.]*\d|\d", text) if n.replace(" ", "") not in src.replace(" ", "")}
     names = set()
-    for s_ in sentences(text):
+    for line in text.splitlines():
+      for s_ in sentences(line):
         for t in s_.split()[1:]:
             t = t.strip(".,;:()!?”\"–")
             if re.match(r"[A-ZÅÄÖ][\wåäö\-]+$", t) and t.lower()[:5] not in src and t.lower() not in FRONTED | SUBJ:
@@ -174,4 +176,4 @@ if __name__ == "__main__":
             src = "\n".join(open(x, encoding="utf-8").read() for x in srcfile.split(","))
             nums, names = new_specifics(open(f, encoding="utf-8").read(), src)
             if nums or names:
-                print("  ! finns inte i källan, kontrollera att de är sanna eller stryk:", ", ".join(nums + names))
+                print("  ! finns inte i källorna (behåll bara det du säkert vet är sant):", ", ".join(nums + names))
