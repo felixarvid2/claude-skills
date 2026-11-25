@@ -21,6 +21,7 @@ Claude Code skills from my projects. Copy a folder from `skills/` to `~/.claude/
 | [cloud-session-github-ops](skills/cloud-session-github-ops/SKILL.md) | Claude Code cloud sessions | pushes, releases without tag pushes, new repos, splitting repos, secret checks |
 | [autonomous-github-release](skills/autonomous-github-release/SKILL.md) | any GitHub repo, incl. Claude Code cloud sessions | cut a release on your own: version, notes since the last release, a notes-file PR that triggers the release workflow (template included), verify the assets |
 | [ashfall-region-pipeline](skills/ashfall-region-pipeline/SKILL.md) | [Ashfall](https://github.com/felixarvid2/Ashfall) | how a region or game phase is planned, built, tested and shipped |
+| [humanizer-sv](skills/humanizer-sv/SKILL.md) | Swedish text | rewrite Swedish text so it reads as human and scores low in AI detectors: measured rules (concreteness, V2 word order, rhythm, Swedish AI phrases and typography), a checker script and a runner for four free detectors |
 
 The two `anox-*` skills use tools in the anoxrtx repo (`tools/rigsession.sh`, `anoxcheck.py`, `ab_ev.py`);
 their source of truth is that repo's `.claude/skills/`. The general skills come from one project (Anachronox):
