@@ -63,6 +63,23 @@ utmaning, möjlighet, transparens, främja, aspekt, faktorer, avseende, gälland
 - Varje fråga besvaras, inga lösa trådar.
 - Slutstycke med moral eller uppmaning (`Det är dags att…`, `Tillsammans kan vi…`).
 
+## Tolkande glosor
+
+AI lägger en förklaring efter varje fakta. Stryk dem och låt siffran eller händelsen stå. I testet var det den
+största skillnaden mellan en rapport på 68 % och samma rapport på 12 % i Undetectable (ZeroGPT 46 → 0,
+Grammarly 48 → 0).
+
+| Glosa | Exempel |
+|---|---|
+| vilket tyder på / visar / innebär / ger | `…i 37 svar, vilket tyder på att förändringen fortfarande påverkar många` |
+| något som understryker / speglar | `…något som understryker vikten av…` |
+| alltså (sammanfattande) | `har förvaltningen alltså en stabil grund` |
+| en god / stabil grund att bygga vidare på | |
+| Bakom den siffran finns … | `Bakom den siffran finns många människor som…` |
+| Ett enstaka X bevisar inget, men … | `Ett enstaka väderår bevisar inget om klimatet, men mönstret stämmer…` |
+| Det säger en hel del om … | |
+| På de punkterna … har X en stabil grund | |
+
 ## Ordföljd
 
 - Subjekt först i nästan varje mening (`Jag har…`, `Det finns…`, `Tekniken medför…`). Svenska är V2: tid,

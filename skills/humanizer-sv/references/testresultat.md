@@ -79,10 +79,36 @@ Slutsats: stilputs räcker mot ZeroGPT, Smodin och Grammarly men inte mot Undete
 | **en lång mening med parentes och tankstreck** | **0** |
 | stycket struket | 0 |
 
+## Blindtest: en ny agent med bara skillen
+
+Fem nya AI-texter i andra genrer. En agent som inte sett testerna fick SKILL.md, texterna och användarens
+svar på detaljfrågan (inga detaljer för uppsatserna). Siffror: ZeroGPT / Smodin / Grammarly / Undetectable.
+
+| Text | AI-original | Efter skillen |
+|---|---|---|
+| Doktor Glas (skoluppgift, inga detaljer) | 100 / 100 / 22 / 78 | 13 / 0 / 15 / 27 |
+| LinkedIn (detaljer) | 100 / – / 0 / 99 | 16 / 0 / 0 / 46 |
+| Produkttext (detaljer) | 76 / – / 0 / 84 | 0 / 0 / 0 / 46 |
+| Klimatuppsats (inga detaljer) | 100 / 51 / 18 / 99 | 40 / 0 / 51 / 77 |
+| Enkätrapport (detaljer) | 100 / 50 / 49 / 99 | 46 / 0 / 48 / 68 |
+
+Uppföljning för hand:
+
+| Ändring | Resultat |
+|---|---|
+| Rapporten utan tolkande glosor, aktiv avsändare, utan "Syftet var", sista stycket = vem gör vad | 0 / 0 / 0 / 12 |
+| Klimatuppsatsen utan glosor (bara allmänkunskap: IPCC, Parisavtalet, 2045) | 51 / 0 / 0 / 73 |
+| Klimatuppsatsen med två egna detaljer från eleven (skyfallet i Gävle 2021, solceller hemma) | 27 / 0 / 0 / 47 |
+
+Efter blindtestet fick skillen regeln om tolkande glosor, genreråd för LinkedIn, produkttext och rapport och
+faktakontrollen `--source`.
+
 ## Mönster
 
 1. Konkretion under 3 per 100 ord gav 53–99 i Undetectable oavsett stil. Över 10 gav 10–17.
 2. Samma innehåll med framflyttade led: 63 → 20.
 3. Slang, fragment, scenöppningar och kommakedjor gav inte lägre poäng.
 4. ZeroGPT flaggar formell svenska, även mänsklig. Grammarly flaggar stycken med jämn rytm.
-5. Ingen variant fick 0 i Undetectable. Mänsklig svensk text får 2–18 där.
+5. Tolkande glosor efter varje fakta håller kvar höga poäng även i faktatät text.
+6. Text som bara bygger på allmänkunskap (klimat, AI) är svårast. Egna detaljer hjälper mest.
+7. Ingen variant fick 0 i Undetectable. Mänsklig svensk text får 2–18 där.

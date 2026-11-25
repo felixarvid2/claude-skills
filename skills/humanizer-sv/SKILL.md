@@ -20,10 +20,13 @@ texter (se `references/testresultat.md`). Engelska humanizer-regler fungerar bar
 3. **Svensk ordföljd (V2) sänker mycket.** Exakt samma innehåll gick från 63 till 20 % när meningarna fick
    börja med tid, plats, objekt eller bisats i stället för subjektet (`Sju minuter tog samtalet`,
    `På Sahlgrenska läser…`). AI-svenska är engelsk SVO i svenska ord.
-4. **Det som "låter mänskligt" enligt engelska humanizers fungerar inte.** Slang och slarv (59 %), korta
+4. **Stryk tolkande glosor.** AI förklarar varje fakta (`vilket tyder på att…`, `har förvaltningen alltså en
+   stabil grund att bygga vidare på`, `Bakom den siffran finns…`). Det var den största skillnaden mellan en
+   rapport på 68 % och samma rapport på 12 % (och 0 i de andra tre detektorerna).
+5. **Det som "låter mänskligt" enligt engelska humanizers fungerar inte.** Slang och slarv (59 %), korta
    hackiga fragment, scenöppningar ("Klockan var tjugo i tolv…") och jag-anekdoter med subjektet först
    (53–65 %) flaggades. Långa kommakedjor gav 99 %.
-5. **Hitta aldrig på fakta.** Konkretionen måste vara sann: ur källtexten, ur användarens egna uppgifter
+6. **Hitta aldrig på fakta.** Konkretionen måste vara sann: ur källtexten, ur användarens egna uppgifter
    eller ur källor du har kontrollerat. Saknas detaljer: fråga (steg 1).
 
 ## Arbetsgång
@@ -48,9 +51,11 @@ Om texten är generisk, **fråga användaren** efter 3–6 riktiga detaljer som 
 - blogg: datum, platser, priser, namn på ställen, vad som gick snett
 - rapport: tabellvärden, metod, urval, årtal
 
-Kan användaren inte svara: skriv om ändå, och markera i ditt svar var detaljer skulle göra mest nytta
-(`[ORT]`, `[ÅRTAL]`, `[EXEMPEL FRÅN DIG]`) i stället för att hitta på dem. Säg rakt ut att starka detektorer
-troligen fortfarande ger högt utslag utan dem.
+Kan användaren inte svara: skriv om ändå med det som finns och med fakta du säkert vet (en roman, en
+rapport från IPCC, ett riksdagsbeslut). Lista sedan i ditt svar, inte i den färdiga texten, var detaljer
+skulle göra mest nytta (`ett eget exempel i stycke 2`, `källa med år i stycke 3`). Säg rakt ut att starka
+detektorer troligen ger högt utslag utan dem. I testet låg en klimatuppsats byggd på allmänkunskap kvar på
+73 %. Med två egna detaljer från eleven sjönk den till 47 %.
 
 ### 2. Bryt mallen (struktur)
 AI-svenska följer samma disposition oavsett ämne: tes ("X har blivit en allt viktigare del av…") →
@@ -59,12 +64,17 @@ fördelar → risker → "Sammanfattningsvis… både möjligheter och utmaninga
 - Stryk meningar som inte bär information ("Det är viktigt att komma ihåg att varje situation är unik").
   Att stryka höjer konkretionen utan att något hittas på.
 - Ingen balanserad för/emot-symmetri om inte genren kräver den. Låt en sida väga tyngre.
+- **Inga tolkande glosor.** Efter en siffra eller ett faktum: lägg inte till vad det "visar", "tyder på",
+  "innebär" eller "säger om". Stryk `alltså`, `vilket ger`, `något som understryker`, `en god grund att bygga
+  vidare på`, `Ett enstaka X bevisar inget, men…`. Står tolkningen för något nytt, skriv den som ett eget
+  påstående med eget innehåll.
 - Inget sammanfattande slutstycke. Sluta på en konkret punkt, ett krav med adressat och datum, eller en
   sista iakttagelse.
 - Stycken av olika längd. Ett stycke kan vara en enda mening.
 
 ### 3. Meningar (ordföljd och rytm)
-- **Variera fundamentet.** Högst hälften av meningarna ska börja med subjektet. Flytta fram tid
+- **Variera fundamentet.** Högst hälften av meningarna ska börja med subjektet, särskilt i text med få
+  fakta (nyhetstext med tät konkretion klarade sig med hälften). Flytta fram tid
   (`I tisdags`, `Sedan hösten 2021`), plats (`På röntgen på Sahlgrenska`), objekt (`Torrfisken provade jag en
   gång`), bisats (`När leveransen börjar glida…`) eller predikativ (`Svårare är frågan om…`). Gör det där det
   låter naturligt, inte i varje mening.
@@ -106,11 +116,20 @@ Se `references/ai-markorer.md` för hela listan i nivåer. Kort version:
 ```bash
 python3 scripts/sv_check.py omskriven.txt
 ```
-Åtgärda allt i listan `åtgärder`. Målen: inga nivå 1-fraser, högst 50 % subjekt först, inga negativa
-kontraster, inga serier av jämnlånga meningar, konkretion ≥ 7 per 100 ord när innehållet tillåter.
+Åtgärda allt i listan `åtgärder`. Målen: inga nivå 1-fraser, inga tolkande glosor, inga negativa
+kontraster, inga serier av jämnlånga meningar, högst 50 % subjekt först i faktafattig text, konkretion minst 5
+och helst 7 per 100 ord (bara med sanna detaljer).
 
-Läs sedan texten högt för dig själv som en svensk läsare: låter något översatt? Finns det en mening som
-bara finns för att låta bra? Stryk den. Gör **ett** omskrivningsvarv till som mest. Fler varv slätar ut texten
+Kör också faktakontrollen mot källorna (originalet och det användaren har skrivit):
+```bash
+python3 scripts/sv_check.py omskriven.txt --source original.txt,uppgifter.txt
+```
+Den listar siffror och namn som inte finns i källorna. Varje sådan detalj måste vara något du säkert vet,
+annars stryker du den. Lätt att glida på: produkttexter (funktioner som inte finns), LinkedIn
+(teamritualer, kollegors namn) och rapporter (årtal som bara är gissade).
+
+Läs sedan texten som en svensk läsare: låter något översatt? Finns det en mening som bara finns för att låta
+bra? Stryk den. Arbetet är **ett** omskrivningsutkast plus **ett** rättningsvarv. Fler varv slätar ut texten
 igen.
 
 ### 7. Mät mot detektorerna (valfritt)
@@ -147,11 +166,21 @@ inte hjälper, och det försämrar texten.
 - **Skoluppsats:** egen tes tidigt, källor med namn och år, ett eget exempel. Undvik den balanserade
   "både och"-slutsatsen.
 - **Blogg:** datum, platser, priser, vad som gick snett. Inga "Tips:"-listor i slutet i AI-stil.
-- **Formell rapport:** behåll registret. ZeroGPT flaggar formell svenska även när den är mänsklig, så låt
-  konkretionen (tabellvärden, metod, årtal) bära.
+- **Formell rapport:** behåll sakligheten men med aktiv avsändare (`Förvaltningen skickade ut…`, inte `En
+  undersökning genomfördes`). Stryk `Syftet med denna rapport är att`, `Mot bakgrund av`, `rekommenderas
+  att` och alla tolkningar av siffrorna. Låt tabellvärden, datum och antal bära. Sluta med vem som gör vad
+  och när. Det gav 0 / 0 / 0 / 12 i testet. ZeroGPT flaggar även mänsklig formell svenska, så räkna med
+  några procent där.
+- **LinkedIn-inlägg:** inga `otroligt glad och stolt`, `fantastiska kollegor`, `min resa`, `nu kör vi!` och
+  inga raketemojis. Börja med fakta (datum, företag, roll), en sak du faktiskt gjorde med ett resultat, ett
+  tack som säger vad kollegorna lärde dig.
+- **Produkttext:** mått, effekt, material, pris, garanti och vad som *inte* ingår. Inga `Upptäck`,
+  `perfekta kombinationen`, `den ultimata upplevelsen`, `Beställ i dag och upptäck skillnaden!`. Lägg inte
+  till funktioner som tillverkaren inte har uppgett.
 
 ## Filer
-- `scripts/sv_check.py` räknar markörer, ordföljd, rytm, typografi och konkretion. Ingen nätåtkomst.
+- `scripts/sv_check.py` räknar markörer, ordföljd, rytm, typografi, glosor och konkretion, och listar
+  med `--source` detaljer som saknas i källorna. Ingen nätåtkomst.
 - `scripts/detect.js` kör de fyra gratisdetektorerna med Playwright.
 - `references/ai-markorer.md` innehåller hela listan med svenska AI-markörer och ersättningar.
 - `references/detektorer.md` beskriver vilka detektorer som spelar roll för svenska, hur de beter sig och hur
